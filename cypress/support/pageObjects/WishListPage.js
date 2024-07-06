@@ -7,7 +7,7 @@ const selectors = {
         searchItem: "#itemSearchTextInput",
         wishlistItem: "a[title*='iPhone']", 
         removeButton: "[name='submit.deleteItem']", 
-        deletedItem: ".a-row.a-spacing-none .a-alert-content", //"#item_IUATPP4KJX91R > :nth-child(2) > div[aria-live='polite'] i+div",
+        deletedItem: ".a-row.a-spacing-none .a-alert-content",
         zeroItem: ".zero-items-image-section" 
     }
 };
