@@ -14,8 +14,8 @@ const selectors = {
     
     }
 };
-
 export class ProductSearchPage {
+    
 
     typeInSearchBar(searchItem) {
         return cy.get(selectors.search.searchBar).type(searchItem);
@@ -49,7 +49,11 @@ export class ProductSearchPage {
     validateBrandFilter(brandName) {
        return cy.get(selectors.results.selectProduct).each(($el) => {
             cy.log($el.text());
-            cy.wrap($el).should('contain.text', brandName);
+            const regex = new RegExp(brandName, 'i');
+            cy.wrap($el).should(($span) => {
+                const actualText = $span.text();
+                expect(regex.test(actualText)).to.be.true;
+            });
         });
     }
 }

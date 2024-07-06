@@ -20,7 +20,7 @@ const selectors = {
 export class AccountPage {
     navigateToYourOrders() {
         cy.get(selectors.accountMenu.accountMenuButton).trigger('mouseover');
-        return cy.get(selectors.accountMenu.yourOrders).click();
+        return cy.get(selectors.accountMenu.yourOrders).click({force: true});
     }
 }
 

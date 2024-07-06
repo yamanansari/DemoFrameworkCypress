@@ -11,6 +11,9 @@ const selectors = {
 
 export class CartPage {
 
+    proceedToCheckout() {
+        return cy.get(selectors.cart.proceedToCheckoutButton).click();
+    }
     verifyProductAdded(productName) {
         return cy.get(selectors.verifyProductAdded.productTitle).should('contain', productName);
     }
@@ -25,7 +28,5 @@ export class CartPage {
             cy.get(selectors.cart.quantityDropdown).select("1",{force:true});
         });
     }
-    proceedToCheckout() {
-        return cy.get(selectors.cart.proceedToCheckoutButton).click();
-    }
+    
 }
