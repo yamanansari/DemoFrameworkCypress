@@ -4,6 +4,7 @@ module.exports = defineConfig({
   projectId: 'rvsd46',
   viewportWidth: 1280,
   viewportHeight: 720,
+  defaultCommandTimeout:10000,
   retries: {
     "runMode": 2,  // Number of retries when running tests via cypress run.
     "openMode": 1  // Number of retries when running tests via cypress open.
@@ -11,9 +12,23 @@ module.exports = defineConfig({
   e2e: {
     setupNodeEvents(on, config) {
       
+      initPlugin(on, config);
+      return config;
+
       // implement node event listeners here
     },
-  },defaultCommandTimeout:10000
+
+  },
+  component: {
+    setupNodeEvents(on, config) {
+      initPlugin(on, config);
+    },
+    devServer: {
+      framework: 'react',
+      bundler: 'webpack',
+    },
+  },
+  
 
   // resolution
   // 

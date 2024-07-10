@@ -1,7 +1,7 @@
 /// <reference types='cypress' />
 
 import 'cypress-iframe'
-import { LoginPage } from '../support/pageObjects/loginPage';
+import { LoginPage } from '../support/pageObjects/LoginPage';
 
 Cypress.Commands.add('amazonLogin', (email, password) => {
   const loginPage = new LoginPage();
