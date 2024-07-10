@@ -1,3 +1,5 @@
+/// <reference types='cypress' />
+
 const selectors = {
     productPage: {
         addToCartButton: "#add-to-cart-button.a-button-input",

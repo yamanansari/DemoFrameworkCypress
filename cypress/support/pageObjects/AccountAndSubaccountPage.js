@@ -1,3 +1,5 @@
+/// <reference types='cypress' />
+
 const selectors = {
     accountMenu: {
         accountMenuButton: "#nav-link-accountList",

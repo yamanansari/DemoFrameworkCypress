@@ -1,3 +1,5 @@
+/// <reference types='cypress' />
+
 const selectors = {
     wishListModal: {
         addToWishlistButton: "#add-to-wishlist-button-submit", 

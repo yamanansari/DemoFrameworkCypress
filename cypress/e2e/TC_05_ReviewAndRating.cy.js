@@ -1,6 +1,6 @@
-
+/// <reference types='cypress' />
 import { reviewText, reviewTitle, url, validEmail, validPassword } from "../support/constants";
-import { LoginPage } from "../support/pageObjects/loginPage";
+import { LoginPage } from "../support/pageObjects/LoginPage";
 import { AccountPage, OrdersPage, ReviewPage } from "../support/pageObjects/AccountAndSubaccountPage";
 
 const loginPage = new LoginPage();

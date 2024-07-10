@@ -1,3 +1,5 @@
+/// <reference types='cypress' />
+
 import 'cypress-iframe'
 import { LoginPage } from '../support/pageObjects/loginPage';
 

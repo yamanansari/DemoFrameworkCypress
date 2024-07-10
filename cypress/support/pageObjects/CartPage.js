@@ -1,3 +1,5 @@
+/// <reference types='cypress' />
+
 const selectors = {
     cart: {
     proceedToCheckoutButton: "[name='proceedToRetailCheckout']",

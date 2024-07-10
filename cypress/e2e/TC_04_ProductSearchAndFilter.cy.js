@@ -1,3 +1,4 @@
+/// <reference types='cypress' />
 
 import { url} from "../support/constants";
 import { ProductSearchPage } from "../support/pageObjects/ProductSearchPage";

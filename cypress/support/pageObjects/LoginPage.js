@@ -1,4 +1,6 @@
-import { emailError, passwordError } from "../constants";
+/// <reference types='cypress' />
+
+import { emailError, passwordError } from "../constants"
 
 const selectors = {
     signIn:{

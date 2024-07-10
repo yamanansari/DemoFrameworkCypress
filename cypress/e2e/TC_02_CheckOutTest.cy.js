@@ -1,10 +1,11 @@
+/// <reference types='cypress' />
 
 import { url,validEmail,validPassword } from "../support/constants";
 import { CartPage } from "../support/pageObjects/CartPage";
 import { CheckoutPage } from "../support/pageObjects/CheckoutPage";
 import { ProductPage } from "../support/pageObjects/ProductPage";
 import { ProductSearchPage } from "../support/pageObjects/ProductSearchPage";
-import { LoginPage } from "../support/pageObjects/loginPage";
+import { LoginPage } from "../support/pageObjects/LoginPage";
 
 const productSearchPage = new ProductSearchPage();
 const productPage = new ProductPage();
