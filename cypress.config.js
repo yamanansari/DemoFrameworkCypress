@@ -11,18 +11,13 @@ module.exports = defineConfig({
   },
   e2e: {
     setupNodeEvents(on, config) {
-      
-      initPlugin(on, config);
-      return config;
 
       // implement node event listeners here
     },
 
   },
   component: {
-    setupNodeEvents(on, config) {
-      initPlugin(on, config);
-    },
+  
     devServer: {
       framework: 'react',
       bundler: 'webpack',
