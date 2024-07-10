@@ -1,3 +1,4 @@
+/// <reference types='cypress' />
 const selectors = {
     checkout: {
         addressForm: {
