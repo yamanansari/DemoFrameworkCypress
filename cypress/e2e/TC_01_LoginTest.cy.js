@@ -11,6 +11,16 @@ describe('Amazon Login Tests', () => {
  
   beforeEach(() => {
 
+    // Intercept the CAPTCHA verification request and mock the response
+    cy.intercept('POST', '/captcha/verify', (req) => {
+      req.reply({
+        statusCode: 200,
+        body: {
+          success: true,
+        },
+      });
+    });
+    
     // Visit the Amazon login page before each test
     cy.visit(url,{
       headers:{"Accept-Encoding": "gzip , deflate"}
