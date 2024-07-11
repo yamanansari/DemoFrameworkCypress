@@ -20,7 +20,10 @@ jobs:
       - name: Cypress run
         # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6
-        
+        with:
+          record: true
+          parallel: true
+          
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
