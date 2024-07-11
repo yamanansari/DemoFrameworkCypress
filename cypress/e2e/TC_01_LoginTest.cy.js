@@ -29,7 +29,7 @@ describe('Amazon Login Tests', () => {
     loginPage.validatePasswordErrorMessage();
   });
 
-  it('Should login successfully with valid email and password', () => {
+  it.only('Should login successfully with valid email and password', () => {
     cy.amazonLogin(validEmail, validPassword);
     // validate login
     loginPage.validateLogInUrl(); 
