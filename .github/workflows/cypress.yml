@@ -1,5 +1,7 @@
 name: Cypress Tests
-on: [push]
+on: 
+  schedule:
+    - cron: "0 0 * * *"  #every day at midnight UTC / 5:30 am in india
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
