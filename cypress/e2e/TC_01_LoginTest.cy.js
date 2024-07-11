@@ -20,7 +20,7 @@ describe('Amazon Login Tests', () => {
         },
       });
     });
-    
+
     // Visit the Amazon login page before each test
     cy.visit(url,{
       headers:{"Accept-Encoding": "gzip , deflate"}
@@ -39,7 +39,7 @@ describe('Amazon Login Tests', () => {
     loginPage.validatePasswordErrorMessage();
   });
 
-  it.only('Should login successfully with valid email and password', () => {
+  it('Should login successfully with valid email and password', () => {
     cy.amazonLogin(validEmail, validPassword);
     // validate login
     loginPage.validateLogInUrl(); 
