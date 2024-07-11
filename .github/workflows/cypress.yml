@@ -1,47 +1,30 @@
 name: Cypress Tests
-on: [push]
-  # schedule:
-  #   - cron: "0 0 * * *"  #every day at midnight UTC / 5:30 am in india
+on:
+  push:
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-    # Runs tests in parallel with matrix strategy https://docs.cypress.io/guides/guides/parallelization
-    # https://docs.github.com/en/actions/using-jobs/using-a-matrix-for-your-jobs
-    # Also see warning here https://github.com/cypress-io/github-action#parallel
-   
-    # strategy:
-    #   fail-fast: false # https://github.com/cypress-io/github-action/issues/48
-    #   matrix:
-    #     containers: [1, 2] # Uses 2 parallel instances
-    
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Cypress run
-        # Uses the official Cypress GitHub action https://github.com/cypress-io/github-action
         uses: cypress-io/github-action@v6
         with:
           record: true
           parallel: true
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} # record on cloud
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
       - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: cypress-screenshots
           path: cypress/screenshots
-      # Test run video was always captured, so this action uses "always()" condition
+
       - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: cypress-videos
-          path: cypress/videos  
-          
+          path: cypress/videos
         env:
-          # For recording and parallelization to work you must set your CYPRESS_RECORD_KEY
-          # in GitHub repo → Settings → Secrets → Actions
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          # Creating a token https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
