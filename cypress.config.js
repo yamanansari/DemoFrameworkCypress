@@ -7,6 +7,7 @@ module.exports = defineConfig({
   defaultCommandTimeout:10000,
   videosFolder: 'cypress/videos',
   screenshotsFolder: 'cypress/screenshots',
+  cacheAcrossSpecs: true,
   video: true,
   env: {
     // Environment variables
