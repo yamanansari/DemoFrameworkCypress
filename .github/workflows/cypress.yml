@@ -14,11 +14,10 @@ jobs:
         with:
           record: true
           parallel: true
+          browser: chrome
+          headless: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          
-      - name: Run Cypress tests in Chrome
-        run: npm run cypress:run --browser chrome --headed
 
       - uses: actions/upload-artifact@v3
         if: failure()
