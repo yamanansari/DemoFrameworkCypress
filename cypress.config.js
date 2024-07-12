@@ -4,6 +4,7 @@ module.exports = defineConfig({
   projectId: 'wiihzt',
   viewportWidth: 1280,
   viewportHeight: 720,
+  chromeWebSecurity: false,
   defaultCommandTimeout:10000,
   videosFolder: 'cypress/videos',
   screenshotsFolder: 'cypress/screenshots',
