@@ -1,8 +1,8 @@
 name: Cypress Tests
 on: 
-  push:
-  # schedule:
-  #   - cron: "0 0 * * *" 
+  #push:
+   schedule:
+   - cron: "0 0 * * *" 
 jobs:
   cypress-run:
     runs-on: windows-latest
