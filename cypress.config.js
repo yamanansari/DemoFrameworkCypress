@@ -13,6 +13,7 @@ module.exports = defineConfig({
   env: {
     // Environment variables
     CYPRESS_RECORD_KEY: process.env.CYPRESS_RECORD_KEY,
+    location: 'india'
   },
   retries: {
     "runMode": 2,  // Number of retries when running tests via cypress run.
