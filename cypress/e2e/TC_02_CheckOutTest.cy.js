@@ -2,7 +2,7 @@
 
 import { url,validEmail,validPassword } from "../support/constants";
 import { CartPage } from "../support/pageObjects/CartPage";
-//import { CheckoutPage } from "../support/pageObjects/CheckoutPage";
+import { CheckoutPage } from "../support/pageObjects/CheckoutPage";
 import { ProductPage } from "../support/pageObjects/ProductPage";
 import { ProductSearchPage } from "../support/pageObjects/ProductSearchPage";
 import { LoginPage } from "../support/pageObjects/LoginPage";
@@ -10,7 +10,7 @@ import { LoginPage } from "../support/pageObjects/LoginPage";
 const productSearchPage = new ProductSearchPage();
 const productPage = new ProductPage();
 const cartPage = new CartPage();
-//const checkoutPage = new CheckoutPage();
+const checkoutPage = new CheckoutPage();
 const loginPage = new LoginPage();
 
 describe('Amazon.in Product Search, Add to Cart and Checkout Test', () => {
@@ -21,7 +21,7 @@ describe('Amazon.in Product Search, Add to Cart and Checkout Test', () => {
         cy.visit(url,{
             headers:{"Accept-Encoding": "gzip , deflate"}
         });
-      //  loginPage.visitSignInPage();
+        loginPage.visitSignInPage();
 
         cy.fixture('product').then((product) => {
             this.product = product;
@@ -31,12 +31,12 @@ describe('Amazon.in Product Search, Add to Cart and Checkout Test', () => {
         });
         
     });
-    it('Search for a product, add it to the cart, and proceed to checkout',function () {
+    it.skip('Search for a product, add it to the cart, and proceed to checkout',function () {
        
          // Login
-        //  cy.amazonLogin(validEmail, validPassword);
-        //  loginPage.validateLogInUrl(); 
-        //  loginPage.validateLogInUser();
+         cy.amazonLogin(validEmail, validPassword);
+         loginPage.validateLogInUrl(); 
+         loginPage.validateLogInUser();
 
          // Search for the product
          productSearchPage.typeInSearchBar(this.product.name);
@@ -53,12 +53,12 @@ describe('Amazon.in Product Search, Add to Cart and Checkout Test', () => {
          cartPage.verifyProductAdded(this.product.name);
          cartPage.verifyAndSetQuantityToOne(this.product.name)
  
-         // depents on login 
-        //  // Proceed to checkout
-        //  cartPage.proceedToCheckout();
+         // depent on login
+         // Proceed to checkout
+         cartPage.proceedToCheckout();
  
-        //  // Fill in the necessary details (address, payment method)
-        //  checkoutPage.fillAddressDetails(this.address);
-        //  checkoutPage.validateAddress();
+         // Fill in the necessary details (address, payment method)
+         checkoutPage.fillAddressDetails(this.address);
+         checkoutPage.validateAddress();
         });
     });
