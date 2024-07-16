@@ -1,11 +1,11 @@
 name: Cypress Tests
 on: 
-  #push:
-   schedule:
-   - cron: "0 0 * * *" 
+  push:
+  #  schedule:
+  #  - cron: "0 0 * * *" 
 jobs:
   cypress-run:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     environment: 
       name: india
  
@@ -13,8 +13,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # - name: Install Chrome
-      #   run: sudo apt-get install -y google-chrome-stable
+      - name: Install Chrome
+        run: sudo apt-get install -y google-chrome-stable
       
       - name: Cypress run
         uses: cypress-io/github-action@v6
