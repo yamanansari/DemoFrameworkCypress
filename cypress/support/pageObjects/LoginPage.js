@@ -42,11 +42,11 @@ export class LoginPage {
     }
     validateEmailErrorMessage(){
        return cy.get(selectors.message.authEmail).should('be.visible')
-       .and('contain', emailError);
+       .and('contain.text', emailError);
     }
     validatePasswordErrorMessage(){
       return cy.get(selectors.message.authError).should('be.visible')
-      .and('contain', passwordError);
+      .and('contain.text', passwordError);
     }
     validateLogInUrl(){
      return cy.url().should('include','/?ref_=nav_ya_signin');
