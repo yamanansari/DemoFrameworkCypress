@@ -22,7 +22,7 @@ jobs:
           record: true
           parallel: true
           browser: chrome
-          headless: true
+          headless: false
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           CYPRESS_location: india
