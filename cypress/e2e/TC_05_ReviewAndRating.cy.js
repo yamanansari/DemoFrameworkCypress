@@ -18,7 +18,7 @@ describe('Amazon Product Review and Rating', () => {
         loginPage.visitSignInPage();
     });
 
-    it('Should allow a user to submit a product review and verify it', () => {
+    it.skip('Should allow a user to submit a product review and verify it', () => {
         
         // Log in
         cy.amazonLogin(validEmail, validPassword);

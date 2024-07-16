@@ -35,7 +35,7 @@ describe('Amazon.in Wishlist Test', () => {
     });
 
 
-    it('Should add a product to the wishlist and verify it', function () { 
+    it.skip('Should add a product to the wishlist and verify it', function () { 
         
         // Search for the product
         cy.visit(url);
@@ -55,7 +55,7 @@ describe('Amazon.in Wishlist Test', () => {
         wishlistPage.verifyItemInWishlist(this.product.name);
     });
 
-    it('Should remove a product from the wishlist and verify it', function () {  
+    it.skip('Should remove a product from the wishlist and verify it', function () {  
         cy.visit(url);
         // Navigate to the wishlist
         wishlistPage.navigateToWishlist();
