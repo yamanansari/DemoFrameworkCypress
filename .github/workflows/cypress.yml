@@ -38,6 +38,9 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Install Dependencies
+        run: npm install
+
       - name: Install Chrome
         run: sudo apt-get install -y google-chrome-stable
 
@@ -48,7 +51,7 @@ jobs:
           parallel: ${{ github.event.inputs.parallel || 'true' }}
           browser: ${{ github.event.inputs.browser || 'chrome' }}
           headed: ${{ github.event.inputs.headed || 'false' }}
-          spec: ${{ github.event.inputs.tag && format('cypress/e2e/**/*{0}*.cy.{1}', github.event.inputs.tag, 'js') || '' }}
+          spec: ${{ github.event.inputs.tag != '' && 'cypress/e2e/**/*' + github.event.inputs.tag + '*.cy.js' || '' }}
           config: retriesRunMode=${{ github.event.inputs.retries || '2' }}
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
