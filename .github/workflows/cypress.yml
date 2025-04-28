@@ -1,68 +1,42 @@
 name: Cypress Tests
-
-on:
+on: 
   push:
-    branches:
-      - main
-      - master
-  workflow_dispatch:
-    inputs:
-      browser:
-        description: 'Browser to run tests (chrome, firefox, edge)'
-        required: false
-        default: 'chrome'
-      headed:
-        description: 'Run tests in headed mode (true/false)'
-        required: false
-        default: 'false'
-      parallel:
-        description: 'Run tests in parallel (true/false)'
-        required: false
-        default: 'true'
-      retries:
-        description: 'Number of retries for failed tests'
-        required: false
-        default: '2'
-      tag:
-        description: 'Cypress tag to filter tests (example: @smoke)'
-        required: false
-        default: ''
-  schedule:
-    - cron: '0 0 * * *' # Every night at midnight
-
+  #  schedule:
+  #  - cron: "0 0 * * *" 
 jobs:
   cypress-run:
     runs-on: ubuntu-latest
-
+    environment: 
+      name: india
+ 
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Install Chrome
         run: sudo apt-get install -y google-chrome-stable
-
-      - name: Run Cypress Tests
+      
+      - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
           record: true
-          parallel: ${{ github.event.inputs.parallel || 'true' }}
-          browser: ${{ github.event.inputs.browser || 'chrome' }}
-          headed: ${{ github.event.inputs.headed || 'false' }}
-          spec: ${{ github.event.inputs.tag && format('cypress/e2e/**/*{0}*.cy.{1}', github.event.inputs.tag, 'js') || '' }}
-          config: retriesRunMode=${{ github.event.inputs.retries || '2' }}
+          parallel: true
+          browser: chrome
+          headless: false
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-
-      - name: Upload Screenshots on Failure
-        uses: actions/upload-artifact@v3
+          CYPRESS_location: india
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: cypress-screenshots
           path: cypress/screenshots
 
-      - name: Upload Videos Always
-        uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v3
         if: always()
         with:
           name: cypress-videos
           path: cypress/videos
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          CYPRESS_location: india
