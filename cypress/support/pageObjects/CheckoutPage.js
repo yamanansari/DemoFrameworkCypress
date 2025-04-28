@@ -31,5 +31,7 @@ export class CheckoutPage {
     }
     validateAddress(){
        return cy.get(selectors.checkout.addressValidation.addressChangebutton).should('exist');
+       
+
     }
 }
