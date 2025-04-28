@@ -1,11 +1,11 @@
 /// <reference types='cypress' />
 
-import { url,validEmail,validPassword } from "../support/constants";
+// import { url,validEmail,validPassword } from "../support/constants";
 import { CartPage } from "../support/pageObjects/CartPage";
 import { CheckoutPage } from "../support/pageObjects/CheckoutPage";
 import { ProductPage } from "../support/pageObjects/ProductPage";
 import { ProductSearchPage } from "../support/pageObjects/ProductSearchPage";
-import { LoginPage } from "../support/pageObjects/LoginPage";
+import { LoginPage } from "../support/pageObjects/loginPage";
 
 const productSearchPage = new ProductSearchPage();
 const productPage = new ProductPage();
@@ -14,15 +14,26 @@ const checkoutPage = new CheckoutPage();
 const loginPage = new LoginPage();
 
 describe('Amazon.in Product Search, Add to Cart and Checkout Test', () => {
-    
+    // before(function (){
+    //     cy.reload()
+    //     cy.amazon(validEmail, validPassword); 
+    // })
+                  
     beforeEach(function () {
         
-        // Visit the Amazon login page before each test
-        cy.visit(url,{
-            headers:{"Accept-Encoding": "gzip , deflate"}
+       
+        cy.readFile('cypress/fixtures/session.json').then((session) => {
+            session.cookies.forEach((cookie) => {
+                cy.setCookie(cookie.name, cookie.value);
+            });
         });
-        loginPage.visitSignInPage();
-
+    //    cy.visit(url,{
+    //            headers:{"Accept-Encoding": "gzip , deflate"}
+    //            });
+    //        loginPage.validateLogInUrl(); 
+    //        loginPage.validateLogInUser();
+              
+        // Visit the Amazon login page before each test
         cy.fixture('product').then((product) => {
             this.product = product;
         });
@@ -31,13 +42,9 @@ describe('Amazon.in Product Search, Add to Cart and Checkout Test', () => {
         });
         
     });
-    it.skip('Search for a product, add it to the cart, and proceed to checkout',function () {
-       
-         // Login
-         cy.amazonLogin(validEmail, validPassword);
-         loginPage.validateLogInUrl(); 
-         loginPage.validateLogInUser();
+    it('Search for a product, add it to the cart, and proceed to checkout',function () {
 
+        cy.visit('/')
          // Search for the product
          productSearchPage.typeInSearchBar(this.product.name);
          productSearchPage.clickSearchButton();
@@ -53,12 +60,11 @@ describe('Amazon.in Product Search, Add to Cart and Checkout Test', () => {
          cartPage.verifyProductAdded(this.product.name);
          cartPage.verifyAndSetQuantityToOne(this.product.name)
  
-         // depent on login
          // Proceed to checkout
          cartPage.proceedToCheckout();
  
          // Fill in the necessary details (address, payment method)
          checkoutPage.fillAddressDetails(this.address);
-         checkoutPage.validateAddress();
+         checkoutPage.validateAddress(this.address);
         });
     });

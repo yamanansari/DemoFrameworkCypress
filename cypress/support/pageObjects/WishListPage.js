@@ -1,5 +1,3 @@
-/// <reference types='cypress' />
-
 const selectors = {
     wishListModal: {
         addToWishlistButton: "#add-to-wishlist-button-submit", 
@@ -9,7 +7,7 @@ const selectors = {
         searchItem: "#itemSearchTextInput",
         wishlistItem: "a[title*='iPhone']", 
         removeButton: "[name='submit.deleteItem']", 
-        deletedItem: ".a-row.a-spacing-none .a-alert-content",
+        deletedItem: ".a-row.a-spacing-none .a-alert-content", //"#item_IUATPP4KJX91R > :nth-child(2) > div[aria-live='polite'] i+div",
         zeroItem: ".zero-items-image-section" 
     }
 };
@@ -41,7 +39,7 @@ export class WishlistPage {
     }
     removeItemFromWishlist() {
         // Remove the item from the wishlist
-        return cy.get(selectors.wishlistPage.removeButton).click();
+        return cy.get(selectors.wishlistPage.removeButton).click({ multiple: true });
     }
     verifyRemoveItemFromWishlist() {
         // Verify if the item is present in the wishlist

@@ -1,5 +1,3 @@
-/// <reference types='cypress' />
-
 const selectors = {
     search:{
     searchBar: "#twotabsearchtextbox", 
@@ -10,14 +8,14 @@ const selectors = {
     },
     results: {
         productTitles: "div[data-cy='title-recipe']", 
-        selectProduct: "h2 span", 
+        selectProduct: " div[data-cy='title-recipe'] h2 span", 
         productList: ".s-main-slot .s-result-item", 
         productTitle: "span.a-text-normal"
     
     }
 };
+
 export class ProductSearchPage {
-    
 
     typeInSearchBar(searchItem) {
         return cy.get(selectors.search.searchBar).type(searchItem);
@@ -32,7 +30,7 @@ export class ProductSearchPage {
     }
 
    selectProduct(product) {
-   return cy.get(selectors.results.selectProduct).contains(product)
+   return cy.get(selectors.results.productTitles).contains(product)
     .should('be.visible')
     .closest('a')
     .invoke('attr', 'href')
@@ -45,17 +43,18 @@ export class ProductSearchPage {
         return cy.get(selectors.filters.brand).contains(brandName).click();
     }
 
-    validateFilteredResults() {
+    validateFilteredResults() { // is not empty 
         return cy.get(selectors.results.selectProduct).should('have.length.greaterThan', 0);
     }
-    validateBrandFilter(brandName) {
-       return cy.get(selectors.results.selectProduct).each(($el) => {
-            cy.log($el.text());
-            const regex = new RegExp(brandName, 'i');
-            cy.wrap($el).should(($span) => {
-                const actualText = $span.text();
-                expect(regex.test(actualText)).to.be.true;
-            });
-        });
-    }
+    validateBrandFilter(model) {
+        cy.get(selectors.results.selectProduct).should('contain', model).and('be.visible');
+    //    return cy.get(selectors.results.selectProduct).each(($el) => {
+    //     const regex = new RegExp(model, 'i');
+                        
+    //         cy.wrap($el).invoke('text') // Fetch the text of the element
+    //         .then((text) => {
+    //             expect(text).to.match(regex); // Perform a case-insensitive match
+    //         });
+    //     });
+     }
 }

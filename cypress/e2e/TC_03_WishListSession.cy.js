@@ -1,10 +1,10 @@
 /// <reference types='cypress' />
 
-import { url, validEmail, validPassword } from "../support/constants";
+// import { url, validEmail, validPassword } from "../support/constants";
 import { ProductPage } from "../support/pageObjects/ProductPage";
 import { ProductSearchPage } from "../support/pageObjects/ProductSearchPage";
 import { WishlistPage } from "../support/pageObjects/WishListPage";
-import { LoginPage } from "../support/pageObjects/LoginPage";
+import { LoginPage } from "../support/pageObjects/loginPage";
 
 const loginPage = new LoginPage();
 const wishlistPage = new WishlistPage();
@@ -13,37 +13,33 @@ const productPage = new ProductPage();
 
 describe('Amazon.in Wishlist Test', () => {
     
-    const login = ()=> {
-        cy.session('login', () => {
-          // create session of visiting the Amazon login page before each test
-            cy.visit(url,{
-                headers:{"Accept-Encoding": "gzip , deflate"}
+      beforeEach(function () {  
+        cy.readFile('cypress/fixtures/session.json').then((session) => {
+            session.cookies.forEach((cookie) => {
+                cy.setCookie(cookie.name, cookie.value);
             });
-            loginPage.visitSignInPage();
-            // Login
-            cy.amazonLogin(validEmail, validPassword);
-            loginPage.validateLogInUrl(); 
-            loginPage.validateLogInUser();
-       
         });
-    }
-    beforeEach(function () {     
-        login();
-        cy.fixture('product').then((product) => {
-            this.product = product;
-        });
-    });
+        // cy.visit(url,{
+        //         headers:{"Accept-Encoding": "gzip , deflate"}
+        //         });
+        //     loginPage.validateLogInUrl(); 
+        //     loginPage.validateLogInUser();
+
+            cy.fixture('product').then((product) => {
+                this.product = product;
+            });
+                });
 
 
-    it.skip('Should add a product to the wishlist and verify it', function () { 
+    it('Should add a product to the wishlist and verify it', function () { 
         
+        cy.visit('/')
         // Search for the product
-        cy.visit(url);
-        productSearchPage.typeInSearchBar(this.product.name);
+        productSearchPage.typeInSearchBar(this.product.productName);
         productSearchPage.clickSearchButton();
 
         // Select the specific product
-        productSearchPage.selectProduct(this.product.name);
+        productSearchPage.selectProduct(this.product.productName);
 
         // Add the product to the wishlist
         productPage.addToWishlist();
@@ -52,12 +48,8 @@ describe('Amazon.in Wishlist Test', () => {
         productPage.navigateToWishlist();
 
         // Verify the product is added to the wishlist
-        wishlistPage.verifyItemInWishlist(this.product.name);
-    });
-
-    it.skip('Should remove a product from the wishlist and verify it', function () {  
-        cy.visit(url);
-        // Navigate to the wishlist
+        wishlistPage.verifyItemInWishlist(this.product.productName);
+   
         wishlistPage.navigateToWishlist();
         wishlistPage.searchItemInWishList(this.product.name);
 

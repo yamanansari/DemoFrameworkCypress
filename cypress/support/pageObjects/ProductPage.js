@@ -1,8 +1,6 @@
-/// <reference types='cypress' />
-
 const selectors = {
     productPage: {
-        addToCartButton: "#add-to-cart-button.a-button-input",
+        addToCartButton: "[id='add-to-cart-button'][type='submit']",
         addToWishlistButton: "[title='Add to Wish List']", 
         viewWishlistLink: "#huc-view-your-list-button", 
     },
@@ -15,7 +13,7 @@ const selectors = {
 export class ProductPage {
     addToCart() {
         // Click on add to cart button
-        return cy.get(selectors.productPage.addToCartButton).eq(0).click({force:true});
+        return cy.get(selectors.productPage.addToCartButton).eq(0).scrollIntoView().dblclick({force:true});
     }
     proceedToCheckout() {
         // Click on proceed to checkout button
